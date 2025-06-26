@@ -1,14 +1,40 @@
-import React from "react";
+import React, { useRef, useState } from "react";
 import Header from "./Header";
+import { validateData } from "../utils/validate";
 
 function Login() {
+  const [isSignIn, setIsSignIn] = useState(true);
+  const [errorMessage,setErrorMessage]=useState(null);
+  const email = useRef(null);
+  const password = useRef(null);
+  const onHandleChange = ()=>{
+    const message = validateData(email.current.value,password.current.value);
+    setErrorMessage(message);
+    // console.log(email.current.value);
+    // console.log(password.current.value);
+  }
+  const toggleChange = () => {
+    setIsSignIn(!isSignIn);
+  }
+
   return (
     <div>
       <Header />
-      <img
-        src="https://assets.nflxext.com/ffe/siteui/vlv3/af2fac72-d956-4952-8686-4d45d359d78c/web/IN-en-20250526-TRIFECTA-perspective_5db3e163-56f7-47c7-9a65-b79b9d76bf24_small.jpg"
-        alt="background image"
-      />
+      <div className="absolute">
+        <img
+          src="https://assets.nflxext.com/ffe/siteui/vlv3/af2fac72-d956-4952-8686-4d45d359d78c/web/IN-en-20250526-TRIFECTA-perspective_5db3e163-56f7-47c7-9a65-b79b9d76bf24_small.jpg"
+          alt="background image"
+        />
+      </div>
+      <form onSubmit={(e)=> e.preventDefault()} className="text-white bg-black/80 w-3/12 absolute mt-36 mx-auto left-0 right-0 p-12 my-36 rounded-xl">
+        <h1 className="text-4xl ml-2 mb-4 font-bold text-white">{isSignIn ? "Sign In" : "Sign Up"}</h1>
+        {!isSignIn && <input type="text" className="p-4 my-4 bg-gray-900 opacity-75 border-white border rounded-sm w-full placeholder:text-gray-200 placeholder:text-xl" placeholder="Enter your Name" />}
+        <input type="text" className="p-4 my-4 bg-gray-900 opacity-75 border border-white rounded-sm w-full placeholder:text-gray-200 placeholder:text-xl " placeholder="Email Address" ref={email} />
+        <input type="password" className="p-4 my-4 bg-gray-900 opacity-75 border border-white rounded-sm w-full placeholder:text-gray-200 placeholder:text-xl " placeholder="Password" ref={password} />
+        <p className="text-red-500">{errorMessage}</p>
+        <button className="bg-red-600 p-4 my-4 w-full cursor-pointer rounded-sm text-2xl font-semibold" onClick={onHandleChange}> {isSignIn ? "Sign In" : "Sign Up"}</button>
+        <p className="cursor-pointer" onClick={toggleChange}>{isSignIn ? "New to Netflix ? Sign Up Now." : "Already registered ? Sign In now."}</p>
+      </form>
     </div>
   );
 }
