@@ -1,27 +1,27 @@
+/* eslint-disable no-unused-vars */
 import React, { useRef, useState } from "react";
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 import Header from "./Header";
 import { validateData } from "../utils/validate";
 import { auth } from "../utils/firebase";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
 
 function Login() {
   const [isSignIn, setIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const email = useRef(null);
   const password = useRef(null);
-  // const name = useRef(null);
+  const navigate = useNavigate();
+  const name = useRef(null);
+  const dispatch = useDispatch();
   const onHandleChange = () => {
     const message = validateData(email.current.value, password.current.value);
-    // if (isSignIn) {
-    //   message = validateData(null, email.current.value, password.current.value);
-    // } else {
-    //   message = validateData(
-    //     name.current.value,
-    //     email.current.value,
-    //     password.current.value
-    //   );
-    // }
-
 
     setErrorMessage(message);
     // console.log(email.current.value);
@@ -34,12 +34,31 @@ function Login() {
     if (!isSignIn) {
       // Sign Up logic
 
-      createUserWithEmailAndPassword(auth, email.current.value, password.current.value)
+      createUserWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
-          // Signed up 
+          // Signed up
           const user = userCredential.user;
-          console.log(user);
-          // ...
+          updateProfile(auth.currentUser, {
+            displayName: name.current.value,
+            photoURL: "https://avatars.githubusercontent.com/u/106990915?v=4",
+          })
+            .then(() => {
+              const { uid, displayName, email, photoURL } = auth.currentUser;
+              dispatch(
+                addUser({
+                  uid: uid,
+                  displayName: displayName,
+                  email: email,
+                  photoURL: photoURL,
+                })
+              );
+              navigate("/browse");
+            })
+            .catch((error) => {});
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -49,12 +68,16 @@ function Login() {
         });
     } else {
       // Sign In logic
-      signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+      signInWithEmailAndPassword(
+        auth,
+        email.current.value,
+        password.current.value
+      )
         .then((userCredential) => {
-          // Signed in 
+          // Signed in
           const user = userCredential.user;
           console.log(user);
-          // ...
+          navigate("/browse");
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -86,7 +109,7 @@ function Login() {
         </h1>
         {!isSignIn && (
           <input
-            // ref={name}
+            ref={name}
             type="text"
             className="p-4 my-4 bg-gray-900 opacity-75 border-white border rounded-sm w-full placeholder:text-gray-200 placeholder:text-xl"
             placeholder="Enter your Name"
