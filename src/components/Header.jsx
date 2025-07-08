@@ -50,7 +50,7 @@ const Header = () => {
     return ()=> unsubscribe();
   }, []);
   return (
-    <div className="absolute px-8 py-2 z-10 bg-gradient-to-b from-black w-screen flex justify-between">
+    <div className="fixed top-0 left-0 right-0 px-8 py-2 z-10 bg-gradient-to-b from-black w-screen flex justify-between">
       <img
         src={LOGO_URL}
         alt="Netflix logo"
