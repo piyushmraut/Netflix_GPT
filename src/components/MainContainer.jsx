@@ -9,8 +9,8 @@ function MainContainer() {
   if (!movies) {
     return;
   }
-  const mainMovie = movies[0];
-  // const mainMovie = movies[Math.floor(Math.random()*19)+1];
+  // const mainMovie = movies[0];
+  const mainMovie = movies[Math.floor(Math.random()*19)+1];
   const { original_title, overview, id } = mainMovie;
 
   return (

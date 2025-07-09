@@ -7,18 +7,18 @@ const SecondaryContainer = () => {
   console.log(movies);
   return (
     <div className="bg-black">
-      <div className="-mt-52 relative z-20">
+      <div className="-mt-96 relative z-20">
         {movies && (
           <MovieList title={"Now Playing"} movies={movies?.nowPlayingMovie} />
         )}
         {movies && (
-          <MovieList title={"Trending"} movies={movies?.nowPlayingMovie} />
+          <MovieList title={"Popular"} movies={movies?.popularMovie} />
         )}
         {movies && (
-          <MovieList title={"Latest"} movies={movies?.nowPlayingMovie} />
+          <MovieList title={"Top Rated"} movies={movies?.topRatedMovies} />
         )}
         {movies && (
-          <MovieList title={"Horror"} movies={movies?.nowPlayingMovie} />
+          <MovieList title={"Upcoming"} movies={movies?.upcomingMovies} />
         )}
       </div>
     </div>

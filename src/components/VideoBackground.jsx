@@ -10,10 +10,10 @@ function VideoBackground({ movieId }) {
   return (
     <div>
       <iframe
-        className="w-screen h-screen"
+        className="w-screen aspect-video"
         src={"https://www.youtube.com/embed/" + movieTrailerkey+"?&autoplay=1&mute=1"}
         title="From the World of John Wick: Ballerina (2025) Final Trailer – Ana de Armas, Keanu Reeves"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allow="autoplay "
         referrerPolicy="strict-origin-when-cross-origin"
         allowFullScreen
         
