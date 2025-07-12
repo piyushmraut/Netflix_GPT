@@ -11,7 +11,7 @@ import { auth } from "../utils/firebase";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
-import { AVATAR_URL } from "../utils/constants";
+import { AVATAR_URL, BG_URL } from "../utils/constants";
 
 function Login() {
   const [isSignIn, setIsSignIn] = useState(true);
@@ -59,7 +59,7 @@ function Login() {
               );
               navigate("/browse");
             })
-            .catch((error) => { });
+            .catch((error) => {});
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -96,10 +96,7 @@ function Login() {
     <div>
       <Header />
       <div className="absolute">
-        <img
-          src="https://assets.nflxext.com/ffe/siteui/vlv3/af2fac72-d956-4952-8686-4d45d359d78c/web/IN-en-20250526-TRIFECTA-perspective_5db3e163-56f7-47c7-9a65-b79b9d76bf24_small.jpg"
-          alt="background image"
-        />
+        <img src={BG_URL} alt="background image" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}

@@ -30,3 +30,7 @@
 - TMDB CDN URL
 - Made the browse Page amazing with tailwind css
 - usePopularMovies custom hook creation
+- GPT Search Page
+- GPT Search Bar
+- Multi-language Feature in our App
+- Integrate GPT API (get OPENAI key)
