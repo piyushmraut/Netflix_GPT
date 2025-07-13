@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { lang } from "../utils/languageConstants";
 import { GoogleGenAI } from "@google/genai";
-import { API_OPTIONS, GEMINI_API_KEY } from "../utils/constants";
+import { API_OPTIONS} from "../utils/constants";
 import { addGptMovies } from "../utils/gptSlice";
 
 function GptSearchBar() {
@@ -23,7 +24,7 @@ function GptSearchBar() {
   const gptSearchMovie = () => {
     console.log(search.current.value);
     // Let's try to integrate gemini API
-    const ai = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+    const ai = new GoogleGenAI({ apiKey: import.meta.env.VITE_GEMINI_API_KEY });
     const main = async () => {
       const prompt =
         "Act as a movie recommendation system and suggest some movies for the query" +
@@ -48,10 +49,10 @@ function GptSearchBar() {
     main();
   };
   return (
-    <div className="pt-[10%] flex justify-center">
+    <div className="pt-[25%] md:pt-[10%] flex justify-center">
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="w-1/2 grid grid-cols-12 bg-black rounded-sm"
+        className="w-full md:w-1/2 grid grid-cols-12 bg-black rounded-sm"
       >
         <input
           ref={search}

@@ -29,31 +29,27 @@ const Header = () => {
    *  There was a small bug over there like I am able to access the browse page without login
    *  Hence to avoid that I need to use the useEffect hook.
    */
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in
-        // console.log(user);
-        const { uid, displayName, email, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            displayName: displayName,
-            email: email,
-            photoURL: photoURL,
-          })
-        );
+ useEffect(() => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    if (user) {
+      const { uid, displayName, email, photoURL } = user;
+      dispatch(
+        addUser({
+          uid: uid,
+          displayName: displayName,
+          email: email,
+          photoURL: photoURL,
+        })
+      );
+      navigate("/browse");
+    } else {
+      dispatch(removeUser());
+      navigate("/");
+    }
+  });
 
-        navigate("/browse");
-      } else {
-        dispatch(removeUser());
-        navigate("/");
-      }
-    });
-
-    // unsubscibe when the component unmounts.
-    return () => unsubscribe();
-  }, []);
+  return () => unsubscribe();
+}, []);
 
   const handleGPTSearch = () => {
     dispatch(toggleGptSearch());
@@ -67,7 +63,7 @@ const Header = () => {
   }
   return (
     <div className="absolute top-0 left-0 right-0 px-8 py-2 z-10 bg-gradient-to-b from-black w-screen flex justify-between">
-      <img src={LOGO_URL} alt="Netflix logo" className="w-44" />
+      <img src={LOGO_URL} alt="Netflix logo" className="w-44 " />
       {user && (
         <div className="flex">
          {gptSearch &&  <select className="bg-black/70 border border-2 border-amber-500 text-amber-50 p-2 mt-[18px] mr-2 h-12" onChange={handleLanguageChange}>
@@ -78,7 +74,7 @@ const Header = () => {
             ))}
           </select>}
           <button
-            className="bg-violet-600 rounded-l-2xl cursor-pointer w-28 h-12 text-white mt-4 px-4 py-2 border border-2 border-amber-500"
+            className="bg-violet-600 rounded-l-2xl cursor-pointer w-32 h-12 text-white mt-4 px-4 py-2 border border-2 border-amber-500"
             onClick={handleGPTSearch}
           >
             {gptSearch ? "Home": "GPT Search"}

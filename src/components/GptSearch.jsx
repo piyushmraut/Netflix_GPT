@@ -4,15 +4,16 @@ import GptSuggestions from './GptSuggestions'
 
 function GptSearch() {
   return (
-    <div>
-        <div className="fixed -z-10">
+    <div className="relative min-h-screen">
+      <div className="fixed inset-0 -z-10">
         <img
-        src={BG_URL}
+          src={BG_URL}
           alt="background image"
+          className="w-full h-full object-cover"
         />
       </div>
-        <GptSearchBar/>
-        <GptSuggestions/>
+      <GptSearchBar/>
+      <GptSuggestions/>
     </div>
   )
 }

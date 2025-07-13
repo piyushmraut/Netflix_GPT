@@ -33,4 +33,10 @@
 - GPT Search Page
 - GPT Search Bar
 - Multi-language Feature in our App
-- Integrate GPT API (get OPENAI key)
+- Integrate GPT API (get GEMINI key)
+- GPT Search API Call
+- fetched gptMoviesSuggestions from tmdb
+- created gpt Slice added data
+- reused movie list components to make movie suggestions container
+- Memoization
+- We made site Responsive.

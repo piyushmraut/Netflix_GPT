@@ -93,14 +93,14 @@ function Login() {
   };
 
   return (
-    <div>
+    <div className="relative min-h-screen">
       <Header />
-      <div className="absolute">
-        <img src={BG_URL} alt="background image" />
+      <div className="fixed inset-0">
+        <img src={BG_URL} alt="background image" className="w-full h-full object-cover"/>
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="text-white bg-black/80 w-3/12 absolute mt-36 mx-auto left-0 right-0 p-12 my-36 rounded-xl"
+        className="text-white bg-black/80 w-full  md:w-3/12 absolute mt-36 mx-auto left-0 right-0 p-12 my-36 rounded-xl"
       >
         <h1 className="text-4xl ml-2 mb-4 font-bold text-white">
           {isSignIn ? "Sign In" : "Sign Up"}

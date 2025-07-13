@@ -1,10 +1,14 @@
 import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addMovieTrailer } from "../utils/moviesSlice";
 
+// Let's try to reduce the api calls
+
 function useMovieTrailer(movieId) {
   const dispatch = useDispatch();
+  const movietrail = useSelector((store)=> store.movies.movieTrailer);
+  
   // Let's try to fetch the video
   async function movieTrailer() {
     const data = await fetch(
@@ -19,7 +23,7 @@ function useMovieTrailer(movieId) {
   }
 
   useEffect(() => {
-    movieTrailer();
+    !movietrail && movieTrailer();
   }, []);
 }
 
