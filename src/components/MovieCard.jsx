@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { IMG_CDN } from '../utils/constants'
-import MovieCardModal from './movieCardModal';
+import MovieCardModal from './MovieCardModal';
 
 const MovieCard = ({movie}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
