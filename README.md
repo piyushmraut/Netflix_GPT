@@ -39,4 +39,4 @@
 - created gpt Slice added data
 - reused movie list components to make movie suggestions container
 - Memoization
-- We made site Responsive.
+- Made site Responsive.
