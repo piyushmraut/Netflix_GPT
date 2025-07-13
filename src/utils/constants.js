@@ -37,4 +37,3 @@ export const SUPPORTED_LANGUAGES = [
   },
 ];
 
-export const GEMINI_API_KEY = "AIzaSyB4EWI2KXzhPbac2lqnFi0nnZ-7NnnKd5A";
